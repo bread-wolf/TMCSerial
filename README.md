@@ -24,8 +24,8 @@ git clone https://github.com/A-Bielefeld/TMCSerial.git
 The better way is to add these two as submodules in a git repository of the project :
 
 ```
-git submodule add https://github.com/A-Bielefeld/TMCField.git /lib
-git submodule add https://github.com/A-Bielefeld/TMCSerial.git /lib
+git submodule add https://github.com/A-Bielefeld/TMCField.git lib/TMCField
+git submodule add https://github.com/A-Bielefeld/TMCSerial.git lib/TMCSerial
 git commit -m "Added TMCSerial and its dependencies to project."
 git push
 ```
