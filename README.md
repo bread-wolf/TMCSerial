@@ -33,7 +33,7 @@ git push
 Then pulling updates is as easy as running :
 
 ```
-git submodule update --init --recursive
+git submodule update --recursive --remote
 ```
 
 ## Basic usage
