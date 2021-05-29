@@ -46,8 +46,8 @@ Trinamic chip have a register based interface made up of 32 bits-wide registers,
 Include the TMCSerial header, as well as the needed _Fields header for the chosen IC.
 
 ```C++
-#include"TMCSerial.h"
-#include"TMCXXXX/TMCXXXX_Fields.h"
+#include"TMCSerial.hpp"
+#include"TMCXXXX/TMCXXXX_Fields.hpp"
 ```
 
 One just needs to create a TMCSerial object, and call the begin() method to initialize it. 
