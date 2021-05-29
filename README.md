@@ -1,7 +1,6 @@
 # TMCSerial
 
 Arduino-style library to communicate with Trinamic's single-wire UART based ICs.
-_Dependencies :_ TMCField library
 
 Supported ICs include :
  - TMC7300
@@ -10,6 +9,32 @@ Supported ICs include :
  - TMC22XX Series
 
 This library abstracts writing/reading to/from the chip registers, without hiding functionality behind another layer.
+
+### Including in projects
+
+This library depends on the TMCField library.
+The two can be easily included in a platformio project by just cloning into the _/lib_ folder as such:
+
+```
+cd /lib
+git clone https://github.com/A-Bielefeld/TMCField.git
+git clone https://github.com/A-Bielefeld/TMCSerial.git
+```
+
+The better way is to add these two as submodules in a git repository of the project :
+
+```
+git submodule add https://github.com/A-Bielefeld/TMCField.git /lib
+git submodule add https://github.com/A-Bielefeld/TMCSerial.git /lib
+git commit -m "Added TMCSerial and its dependencies to project."
+git push
+```
+
+Then pulling updates is as easy as running :
+
+```
+git submodule update --init --recursive
+```
 
 ## Basic usage
 
