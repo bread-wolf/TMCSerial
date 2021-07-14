@@ -34,7 +34,7 @@ void TMCSerial::begin()
     _serialPort.begin(_baudrate);    
 }
 
-void TMCSerial::writeField(TMCField field, uint32_t value, uint8_t &tmcError)
+void TMCSerial::writeField(TMCField field, uint32_t value, int8_t &tmcError)
 {
     /* Get value of old register. */
     uint32_t oldRegisterValue, newRegisterValue;
@@ -51,7 +51,7 @@ void TMCSerial::writeField(TMCField field, uint32_t value, uint8_t &tmcError)
     tmcError = writeRegister(field.address(), newRegisterValue);
 }
 
-uint32_t TMCSerial::readField(TMCField field, uint8_t &tmcError)
+uint32_t TMCSerial::readField(TMCField field, int8_t &tmcError)
 {   
     uint32_t registerValue;
     tmcError = readRegister(field.address(), registerValue);
@@ -62,17 +62,17 @@ uint32_t TMCSerial::readField(TMCField field, uint8_t &tmcError)
 void TMCSerial::writeField(TMCField field, uint32_t value)
 {
     /* Simply call original function and discard error code. */
-    uint8_t errorCode;
+    int8_t errorCode;
     writeField(field, value, errorCode);
 }
 
 uint32_t TMCSerial::readField(TMCField field)
 {
-    uint8_t errorCode;
+    int8_t errorCode;
     return readField(field, errorCode);
 }
 
-uint8_t TMCSerial::writeRegister(uint8_t address, uint32_t &registerValue)
+int8_t TMCSerial::writeRegister(uint8_t address, uint32_t &registerValue)
 {
     /* Prepare write datagram */
     uint8_t addressWrite = address | WRITE_BIT;
@@ -108,7 +108,7 @@ uint8_t TMCSerial::writeRegister(uint8_t address, uint32_t &registerValue)
     return TMCSERIAL_RW_SUCCESS;    
 }
 
-uint8_t TMCSerial::readRegister(uint8_t address, uint32_t &registerValue)
+int8_t TMCSerial::readRegister(uint8_t address, uint32_t &registerValue)
 {
     /* Prepare read datagram */
     uint8_t readRequest[4] = {SYNC_BYTE, _chipAddress, address, 0};

@@ -29,8 +29,8 @@ class TMCSerial
         void begin();
 
         /* Safe register update, calls on read/write functions, and forwards error code. */
-        void writeField(TMCField field, uint32_t value, uint8_t &tmcError);
-        uint32_t readField(TMCField field, uint8_t &tmcError);
+        void writeField(TMCField field, uint32_t value, int8_t &tmcError);
+        uint32_t readField(TMCField field, int8_t &tmcError);
 
         /* Overloaded register functions, not using error code for simpler syntax. */
         void writeField(TMCField field, uint32_t value);
@@ -55,8 +55,8 @@ class TMCSerial
         uint8_t _chipAddress;
     
         /* Read and Write raw registers using its address, returns error code. */
-        uint8_t writeRegister(uint8_t address, uint32_t &registerValue);
-        uint8_t readRegister(uint8_t address, uint32_t &registervalue);
+        int8_t writeRegister(uint8_t address, uint32_t &registerValue);
+        int8_t readRegister(uint8_t address, uint32_t &registervalue);
 
         /* Calculate CRC for outgoing and incoming data */
         bool _enableReadChecksum;
