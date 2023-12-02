@@ -44,31 +44,31 @@ class TMCSerial
 
         /* Sets delay for bus switching both for master side, and inside TMC Chip in slaveConf register.
          * Lower 3 bits of bitTimes will be ignored which makes valid times :
-         * 8*1, 8*3, 8*5, 8*7, 8*9, 8*11, 8*13, 8*15, values over 120 are ignored. 
+         * 8*1, 8*3, 8*5, 8*7, 8*9, 8*11, 8*13, 8*15, values over 120 are ignored.
          * This is for use with RS485 transceiver that might need delay for switching between transmitting and receiving. */
         void setMasterSlaveDelay(uint32_t bitTimes);
-    
+
+        /* Read and Write raw registers using its address, returns error code. */
+        int8_t writeRegister(uint8_t address, uint32_t &registerValue);
+        int8_t readRegister(uint8_t address, uint32_t &registervalue);
+
     private:
         /* Chip communication parameters */
         HardwareSerial& _serialPort;
         uint32_t _baudrate;
         uint8_t _chipAddress;
-    
-        /* Read and Write raw registers using its address, returns error code. */
-        int8_t writeRegister(uint8_t address, uint32_t &registerValue);
-        int8_t readRegister(uint8_t address, uint32_t &registervalue);
 
         /* Calculate CRC for outgoing and incoming data */
         bool _enableReadChecksum;
-        uint8_t calcCRC(uint8_t data[], uint8_t dataLength);        
+        uint8_t calcCRC(uint8_t data[], uint8_t dataLength);
 
         /* Check counter for successful write feature */
         bool _enableVerifyWrite;
         uint32_t _writeCounter;
         bool isCounterIncreased();
 
-        /* Sets delay to switch while bus switches from master to slave, and vice-versa. 
-         * Input is the number of bits times to wait, _masterSlaveDelay is a value in microseconds. 
+        /* Sets delay to switch while bus switches from master to slave, and vice-versa.
+         * Input is the number of bits times to wait, _masterSlaveDelay is a value in microseconds.
          * If sendToChip is True, function will attempt to write to the chip SLAVECONF register. */
         uint32_t _masterSlaveDelay;
         void updateMasterSlaveDelay(uint32_t bitTimes, bool sendToChip);
