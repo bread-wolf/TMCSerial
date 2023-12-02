@@ -50,7 +50,7 @@ Include the TMCSerial header, as well as the needed _Fields header for the chose
 #include"TMCXXXX/TMCXXXX_Fields.hpp"
 ```
 
-One just needs to create a TMCSerial object, and call the begin() method to initialize it. 
+One just needs to create a TMCSerial object, and call the begin() method to initialize it.
 
 Outside setup():
 ```C++
@@ -92,6 +92,11 @@ if (TMCxxx.readField(TMC7300_DRV_ERR) == 1)
 }
 
 ```
+
+#### Note
+
+Some registers are write-only with the Trinamic UART-based ICs. This means that the read-modify-write method from writeField will not work at all.
+In that case call the writeRegister and readRegister methods. This should only happen with ICs released up to late 2020, as I think Trinamic no longer uses write-only registers in their interfaces.
 
 ## Hardware setup
 
